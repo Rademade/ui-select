@@ -395,7 +395,9 @@ uis.controller('uiSelectCtrl',
 
   // Bind to keyboard shortcuts
   ctrl.searchInput.on('keydown', function(e) {
-
+      if(e.fakeEvent){
+          e = e.fakeEvent;
+      }
     var key = e.which;
 
     // if(~[KEY.ESC,KEY.TAB].indexOf(key)){

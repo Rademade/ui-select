@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.11.2 - 2015-03-17T04:08:46.474Z
+ * Version: 0.11.2 - 2015-04-29T16:39:44.969Z
  * License: MIT
  */
 
@@ -540,7 +540,9 @@ uis.controller('uiSelectCtrl',
   ctrl.clear = function($event) {
     ctrl.select(undefined);
     $event.stopPropagation();
-    ctrl.focusser[0].focus();
+    $timeout(function() {
+      ctrl.focusser[0].focus();
+    }, 0, false);
   };
 
   // Toggle dropdown
@@ -629,7 +631,9 @@ uis.controller('uiSelectCtrl',
 
   // Bind to keyboard shortcuts
   ctrl.searchInput.on('keydown', function(e) {
-
+      if(e.fakeEvent){
+          e = e.fakeEvent;
+      }
     var key = e.which;
 
     // if(~[KEY.ESC,KEY.TAB].indexOf(key)){
@@ -1188,6 +1192,9 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
       });
 
       $select.searchInput.on('keydown', function(e) {
+        if(e.fakeEvent){
+              e = e.fakeEvent;
+          }
         var key = e.which;
         scope.$apply(function() {
           var processed = false;
