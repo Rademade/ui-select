@@ -169,6 +169,9 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
       });
 
       $select.searchInput.on('keydown', function(e) {
+        if(e.fakeEvent){
+              e = e.fakeEvent;
+          }
         var key = e.which;
         scope.$apply(function() {
           var processed = false;
